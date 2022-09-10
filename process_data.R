@@ -13,7 +13,7 @@ d = d %>%
     p6 = c(x$x[6], x$y[6])
     p7 = c(x$x[7], x$y[7])
     # p_pivot = c(x$x[15], x$y[15])
-
+    
     if(p6[1] < p7[1]){
       p_pivot1 = p6
       p_pivot2 = p7
@@ -36,12 +36,4 @@ d = d %>%
   }) %>%
   reduce(rbind.data.frame)
 
-# d = d %>%
-#   filter(index >= 15) %>%
-#   filter(index <= 32)
-
-plt = ggplot(data = d, aes(x = x, y = y, group = id)) + 
-  geom_point(aes(color = condition)) + 
-  geom_point(data = filter(d, index == 14), color = "black") + 
-  facet_grid(.~ condition); plt
-# ggplotly(plt)
+save(d, file = "processed_haglund_data.rda")

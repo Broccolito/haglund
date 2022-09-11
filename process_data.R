@@ -12,7 +12,6 @@ d = d %>%
     p5 = c(x$x[5], x$y[5])
     p6 = c(x$x[6], x$y[6])
     p7 = c(x$x[7], x$y[7])
-    # p_pivot = c(x$x[15], x$y[15])
     
     if(p6[1] < p7[1]){
       p_pivot1 = p6

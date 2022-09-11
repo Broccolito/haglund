@@ -43,7 +43,29 @@ plt4 = ggplot(data = tip_measure, aes(x = condition, y = tip_width)) +
   ylab("Tip Width (A.U.)") + 
   theme_pubr()
 
-ggsave(filename = "tip_area.png", plot = plt1, dpi = 1200, width = 4, height = 5)
-ggsave(filename = "tip_height_difference.png", plot = plt2, dpi = 1200, width = 4, height = 5)
-ggsave(filename = "tip_height.png", plot = plt3, dpi = 1200, width = 4, height = 5)
-ggsave(filename = "tip_width.png", plot = plt4, dpi = 1200, width = 4, height = 5)
+plt5 = ggplot(data = tip_measure, aes(x = condition, y = pitch_angle)) + 
+  geom_boxplot(outlier.shape = NA) + 
+  geom_point(aes(fill = condition), color = "black", shape = 21, 
+             position = position_dodge2(0.2), size = 2) + 
+  labs(fill = "Condition") + 
+  stat_compare_means(method = "t.test", comparisons = list(c("Control", "Diseased"))) + 
+  xlab("") + 
+  ylab("Pitch Angle (Degree)") + 
+  theme_pubr()
+
+plt6 = ggplot(data = tip_measure, aes(x = condition, y = length_ratio)) + 
+  geom_boxplot(outlier.shape = NA) + 
+  geom_point(aes(fill = condition), color = "black", shape = 21, 
+             position = position_dodge2(0.2), size = 2) + 
+  labs(fill = "Condition") + 
+  stat_compare_means(method = "t.test", comparisons = list(c("Control", "Diseased"))) + 
+  xlab("") + 
+  ylab("Length Ratio (A.U.)") + 
+  theme_pubr()
+
+ggsave(filename = "figures/tip_area.png", plot = plt1, dpi = 1200, width = 4, height = 5)
+ggsave(filename = "figures/tip_height_difference.png", plot = plt2, dpi = 1200, width = 4, height = 5)
+ggsave(filename = "figures/tip_height.png", plot = plt3, dpi = 1200, width = 4, height = 5)
+ggsave(filename = "figures/tip_width.png", plot = plt4, dpi = 1200, width = 4, height = 5)
+ggsave(filename = "figures/pitch_angle.png", plot = plt5, dpi = 1200, width = 4, height = 5)
+ggsave(filename = "figures/length_ratio.png", plot = plt6, dpi = 1200, width = 4, height = 5)

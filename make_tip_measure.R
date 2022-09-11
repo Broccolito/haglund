@@ -28,7 +28,7 @@ for(subject_name in subject_names){
     filter(index %in% c(13, 90))
   p13 = filter(d_pitch, index == 13)
   p90 = filter(d_pitch, index == 90)
-  pitch_angle = atan2(p13$x - p90$y, p13$y - p90$y) * (180/pi)
+  pitch_angle = atan2(p13$y - p90$y, p90$x - p13$x) * (180/pi)
   
   # Calculate length ratio
   d_length_ratio = filter(d, id == subject_name) %>%

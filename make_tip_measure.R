@@ -9,17 +9,32 @@ subject_names = unique(d$id)
 tip_measure = vector()
 for(subject_name in subject_names){
   
+  
+  # Use point 14 as a 
   d_case = filter(d, id == subject_name) %>%
     filter(index <= 36) %>%
-    filter(index >= 15)
+    filter(index >= 14) %>%
+    select(x, y, index)
   
-  x = d_case$x
-  y = d_case$y
-  case_poly = SpatialPointsDataFrame(coords = data.frame(x = x, y = y), data = d_case)
+  x_boundary = filter(d_case, index == 14)$x
+  d_case = filter(d_case, x >= x_boundary)
+  d_case = rbind.data.frame(
+    d_case,
+    tibble(
+      x = filter(d_case, index == 14)$x,
+      y = filter(d_case, index == 36)$y,
+      index = NA
+    )
+  )
+
+  case_poly = SpatialPointsDataFrame(coords = data.frame(x = d_case$x, 
+                                                         y = d_case$y),
+                                     data = d_case)
   case_poly = gConvexHull(case_poly)
   
   tip_area = gArea(case_poly)
-  tip_height_difference = filter(d, id == subject_name, index == 14)$y - d_case$y[1]
+  tip_height_difference = filter(d, id == subject_name, index == 14)$y - 
+    filter(d, id == subject_name, index == 36)$y
   tip_height = diff(range(d_case$y))
   tip_width = diff(range(d_case$x))
   

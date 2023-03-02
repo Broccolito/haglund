@@ -55,7 +55,7 @@ plt4 = ggplot(data = tip_measure, aes(x = condition, y = pitch_angle)) +
   ylab("Pitch Angle (Degree)") + 
   theme_pubr()
 
-plt6 = ggplot(data = tip_measure, aes(x = condition, y = length_ratio)) + 
+plt5 = ggplot(data = tip_measure, aes(x = condition, y = length_ratio)) + 
   geom_boxplot(outlier.shape = NA) + 
   geom_point(aes(fill = condition), color = "black", shape = 21, 
              position = position_dodge2(0.2), size = 2) + 
